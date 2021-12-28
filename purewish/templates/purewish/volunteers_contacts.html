@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+  
+{% block content %}
+  
+<style type="text/css">
+  tr:nth-child(even) {
+    background-color: #454d55;
+  }
+  /* tr:hover {
+    opacity: 0.5;
+  } */
+  /* .backgrody {
+    background-color: #454d55;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px;
+  } */
+
+  /* .backgrody:hover {
+    background-color: gray;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    width: 25px;
+    height: auto;
+  }
+
+  .backgrods:hover {
+    background-color: gray;
+    padding-left: 1px;
+    padding-bottom: 2px;
+    border-radius: 5px;
+    width: 25px;
+    height: auto;
+  } */
+
+  /* .backgrodx {
+    background-color: #454d55;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px;
+  }
+
+  .cross {
+    color: white;
+  }
+
+  .cross:hover {
+    color: #343a40;
+  }
+
+  .head {
+    color: blue;
+    background-color: #2b3035;
+    border-top-left-radius: 5px;
+  }
+
+  .backgroid {
+    width: auto;
+  }
+
+  .borderd {
+    border-top-left-radius: 4px;
+  }
+
+  .borderr {
+    border-top-right-radius: 4px;
+  } */
+</style>
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Volunteers Contact</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+              <li class="breadcrumb-item active">Volunteers Contact</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section >
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Contacts</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <table cellpadding="4" cellspacing="100">
+            <thead>
+              <tr class="head">
+                <th class="borderd" width="20"  bgcolor="#2b3035" scope="col">
+                  N/O
+                </th>
+                <th width="2000"  bgcolor="#2b3035" scope="col">
+                  VOLUNTEER
+                </th>
+                <th bgcolor="#2b3035">
+                  FIRST NAME
+                </th>
+                <th bgcolor="#2b3035">
+                  EMAIL
+                </th>
+                <th class="borderr" bgcolor="#2b3035">
+                  PHONE
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for c in contacts %}
+              <div class="marg-bottom">
+                <tr>
+                  <td width="20"  scope="col">
+                    {{c.id}}
+                  </td>
+                  <td width="2000"  scope="col">
+                    <div class="backgrod">
+                      {{c.volunteer}}
+                    </div>
+                  </td>
+                  <td width="300">
+                    <div class="backgrod">
+                      {{c.first_name}}
+                    </div>
+                  </td>
+                  <td width="400">
+                    <div class="backgrod">
+                      {{c.email}}
+                    </div>
+                  </td>
+                  <td width="300">
+                    <div class="backgrod">
+                      {{c.phone}}
+                    </div>
+                  </td>
+                </tr>
+              </div>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+        
+{% endblock content %}

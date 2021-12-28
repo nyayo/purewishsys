@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+ 
+ 
+{% block content %}
+<style type="text/css">
+  tr:nth-child(even) {
+    background-color: #454d55;
+  }
+  tr:hover {
+    opacity: 0.5;
+  }
+  /* .backgrody {
+    background-color: #454d55;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px;
+  } */
+
+  .backgrody:hover {
+    background-color: gray;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    width: 25px;
+    height: auto;
+  }
+
+  .backgrods:hover {
+    background-color: gray;
+    padding-left: 1px;
+    padding-bottom: 2px;
+    border-radius: 5px;
+    width: 25px;
+    height: auto;
+  }
+
+  /* .backgrodx {
+    background-color: #454d55;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px;
+  }
+
+  .cross {
+    color: white;
+  }
+
+  .cross:hover {
+    color: #343a40;
+  }
+
+  .head {
+    color: blue;
+    background-color: #2b3035;
+    border-top-left-radius: 5px;
+  }
+
+  .backgroid {
+    width: auto;
+  }
+
+  .borderd {
+    border-top-left-radius: 4px;
+  }
+
+  .borderr {
+    border-top-right-radius: 4px;
+  } */
+</style>
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Volunteers</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+              <li class="breadcrumb-item active">Volunteers</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div >
+            <div class="modal fade span-12" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+              <div class="modal-content" style="padding: 15px;">
+                  <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Enter Volunteer Details</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                      <!-- Form Starts here -->
+
+                      <form action="#" method="post">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                          {% render_field form.volunteer class="form-control" placeholder="Username" %}
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-user"></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                          {% render_field form.email class="form-control" placeholder="Email" %}
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-envelope"></span>
+                            </div>
+                          </div>
+                        </div> 
+                        <div class="input-group mb-3">
+                          {% render_field form.phone class="form-control" placeholder="Phone Number" type="tel" %}
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-phone"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-8">
+                            <div class="icheck-primary">
+                              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                              <label for="agreeTerms">
+                              I agree to the <a href="#">terms</a>
+                              </label>
+                            </div>
+                          </div>
+                          <!-- /.col -->
+                          <div class="col-4">
+                            <!-- <button type="submit" id="register" name="create" class="btn btn-primary btn-block">Register</button> -->
+                          </div>
+                          <!-- /.col -->
+                        </div>
+
+                        <div class="modal-footer d-flex justify-content-center">
+                          <button type="submit" id="register" name="create" class="btn btn-primary btn-block">SAVE</button>
+                        </div>
+
+                      </form>
+                </div>
+              </div>
+          </div>
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Volunteers</h3>
+
+          <div class="card-tools">
+            <div class="text-center">
+              <a href="" class="btn btn-default" data-toggle="modal" data-target="#modalRegisterForm"><i class="nav-icon fas fa-plus" style="margin-right: 5px;"></i>Add Volunteer</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table cellpadding="4" cellspacing="10">
+            <thead>
+              <tr class="head">
+                <th class="borderd" bgcolor="#2b3035" width="20" scope="col">N/O</th>
+                <th class="borderr" bgcolor="#2b3035" width="2000" scope="col">VOLUNTEER</th>
+                <th width="300" bgcolor="#2b3035" scope="col">FIRST NAME</th>
+                <th width="300" bgcolor="#2b3035" scope="col">SECOND NAME</th>
+                <th width="300" bgcolor="#2b3035" colspan="4" scope="col">EMAIL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for v in volunteer %}
+              <tr cellspacing="10">
+                <td width="20" scope="col">
+                  <div>
+                    <a style="color: white;" href="{% url 'update-volunteer' v.id %}" title="">{{v.id}}</a>
+                  </div>
+                </td>
+                <td width="2000" scope="col">
+                  <a style="color: white;" href="{% url 'update-volunteer' v.id %}" title="">
+                    <div class="backgrod">
+                      {{v.volunteer}}
+                    </div>
+                  </a>
+                </dh>
+
+                <td width="300" scope="col">
+                  <a style="color: white;" href="{% url 'update-volunteer' v.id %}" title="">
+                    <div class="backgrodx">
+                      {{v.first_name}}
+                    </div>
+                  </a>
+                </td>
+
+                <td width="300" scope="col">
+                  <a style="color: white;" href="{% url 'update-volunteer' v.id %}" title="">
+                    <div class="backgrodx">
+                      {{v.second_name}}
+                    </div>
+                  </a>
+                </td>
+
+                <td width="300" scope="col">
+                  <a style="color: white;" href="{% url 'update-volunteer' v.id %}" title="">
+                    <div class="backgrodx">
+                      {{v.email}}
+                    </div>
+                  </a>
+                </td>
+
+                <td width="50">
+                  <div class="backgrody">
+                    <button type="button" class="btn btn-tool" title="Remove">
+                      <a class="cross" href="{% url 'update-volunteer' v.id %}" title=""><i class="fas fa-edit"></i></a>
+                    </button>
+                  </div>
+                </td>
+                <td width="50">
+                  <div class="backgrods">
+                    <button type="button" class="btn btn-tool" title="Remove">
+                      <a class="cross" href="{% url 'delete-volunteer' v.id %}" title=""><i class="fas fa-times"></i></a>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div> 
+        <!-- /.card-body -->
+        <div class="card-footer">
+          {{volunteer_count}} Volunteers
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock content %}

@@ -1,0 +1,66 @@
+<!-- {% extends 'base.html' %} -->
+{% include 'postman/inbox.html' %}
+
+{% block man %}
+<style type="text/css">
+  .backgrod {
+    background-color: #454d55;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px;
+  }
+
+  .backgrod:hover {
+    opacity: 0.5;
+  }
+
+  .cross {
+    color: white;
+  }
+
+  .cross:hover {
+    color: #343a40;
+  }
+
+  .head {
+    color: blue;
+    background-color: #2b3035;
+    border-top-left-radius: 5px;
+  }
+
+  .backgroid {
+    width: auto;
+  }
+</style>
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>All Messages</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="pages/examples/lockscreen.html">Logout</a></li>
+              <li class="breadcrumb-item active">All Messages</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      {% block postman_menu %}{% endblock %}
+      {% block content %}{% endblock %}
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock man %}

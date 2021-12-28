@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+<style type="text/css">
+  .post-body {
+    background-color: #454d55;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .article-title {
+    color: #343a40;
+  }
+
+  a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+
+  .article-content {
+    white-space: pre-line;
+  }
+
+  .article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3;
+  }
+
+  .article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+
+  .backgrod {
+    margin-left: -50px;
+    margin-top: 35px;
+    gap: 2rem;
+  }
+
+  .backgrod a {
+    color: white;
+    background-color: #343a40;
+    font-size: 18px;
+    width: 10px;
+    height: auto;
+  }
+
+  .backgrod a:hover {
+    color: white;
+    background-color: #343a40;
+  }
+</style>
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>All Posts</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="auth-stv/login.php">Logout</a></li>
+              <li class="breadcrumb-item active">All Posts</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div >
+            <div class="modal fade span-12" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+              <div class="modal-content" style="padding: 15px;">
+                  <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Enter Staff Details</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                      <!-- Form Starts here -->
+
+                      <form action="#" method="post">
+                        <div class="input-group mb-3">
+                          <input type="text" name="username" id="username" class="form-control" placeholder="Username" requried>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-user"></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                          <input type="email" name="email" id="email" class="form-control" placeholder="Email" requried>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-envelope"></span>
+                            </div>
+                          </div>
+                        </div>  
+
+                        <div class="input-group mb-3">
+                          <input type="password" name="password" id="password" class="form-control" placeholder="Password" requried>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-lock"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="input-group mb-3">
+                          <input type="password" name="password2"  class="form-control" placeholder="Retype password" required>
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span class="fas fa-lock"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-8">
+                            <div class="icheck-primary">
+                              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                              <label for="agreeTerms">
+                              I agree to the <a href="#">terms</a>
+                              </label>
+                            </div>
+                          </div>
+                          <!-- /.col -->
+                          <div class="col-4">
+                            <!-- <button type="submit" id="register" name="create" class="btn btn-primary btn-block">Register</button> -->
+                          </div>
+                          <!-- /.col -->
+                        </div>
+
+                        <div class="modal-footer d-flex justify-content-center">
+                          <button type="submit" id="register" name="create" class="btn btn-primary btn-block">SAVE</button>
+                        </div>
+
+                      </form>
+                </div>
+              </div>
+          </div>
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          {% for p in post %}
+          <div class="post-body media content content-section">
+            <img class="rounded-circle article-img mt-3" src="{{ p.author.profile.image.url }}" alt="">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="{% url 'user-posts' p.author.username %}">{{ p.author }}</a>
+                <small class="text-muted">{{ p.date_posted|date:"F d, Y" }}</small>
+              </div>
+              <h2><a class="article-title" href="#">{{ p.title }}</a></h2>
+              <p class="article-content">{{ p.post }}</p>
+            </div>
+            <div class="backgrod">
+              <button type="button" class="btn btn-tool" title="Remove">
+                <a class="cross" href="#" title=""><i class="fas fa-edit"></i></a>
+              </button>
+            
+              <button type="button" class="btn btn-tool" title="Remove">
+                <a class="cross" href="#" title=""><i class="fas fa-times"></i></a>
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock %}

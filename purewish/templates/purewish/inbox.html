@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load postman_tags %}
+
+
+{% block content %}
+<style type="text/css">
+  .backgrod {
+    background-color: #454d55;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px;
+    margin-bottom: 8px;
+  }
+
+  .backgrod:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+</style>
+  
+<div class="content-wrapper"> 
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Sent Mails</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="pages/examples/lockscreen.html">Logout</a></li>
+            <li class="breadcrumb-item active">Sent Mails</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <section class="content">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Mails</h3>
+
+        <div class="card-tools">
+          <div class="text-center">
+            <a href="{% url 'compose-mail' %}" class="btn btn-default" >Compose</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        {% for m in mail %}
+          <div class="backgrod">
+            <a href="#" title="">
+            {{m.message}}
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+        
+{% endblock content %}

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+<style type="text/css">
+  .post-body {
+    background-color: #454d55;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .article-title {
+    color: #444444;
+  }
+
+  a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+
+  .article-content {
+    white-space: pre-line;
+  }
+
+  .article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+  }
+
+  .article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+</style>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+           <h2>Posts By {{ view.kwargs.username }}</h2>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <!-- /.card -->
+          <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body">
+	          {% for p in post %}
+	          <div class="post-body media content content-section">
+	            <img class="rounded-circle article-img mt-3" src="" alt="">
+	            <div class="media-body">
+	              <div class="article-metadata">
+	                <a class="mr-2" href="{% url 'user-posts' p.author.username %}">{{ p.author }}</a>
+	                <small class="text-muted">{{ p.date_posted|date:"F d, Y" }}</small>
+	              </div>
+	              <h2><a class="article-title" href="#">{{ p.title }}</a></h2>
+	              <p class="article-content">{{ p.post }}</p>
+	            </div>
+	          </div>
+	          {% endfor %}
+	        </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+{% endblock content %}

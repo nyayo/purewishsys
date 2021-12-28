@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Chat Room</title> 
+</head>
+<body>
+	<div id="chat-message">
+		{% for m in messages %}
+		<div style='background-color: gray; width: 200px; height: auto; border-radius: 3px; padding: 5px; margin-bottom: 5px;'>
+			{{m.user}}:{{m.message}}
+		</div>
+		{% endfor %}
+	</div><br>
+	<input id="chat-message-input" type="text" size="100"><br>
+	<input id="chat-message-submit" type="button" value="Send">
+	{{ room_name|json_script:"room-name" }}
+	{{ username|json_script:"user-name" }}
+	<script>
+		const roomName = JSON.parse(document.getElementById('room-name').textContent);
+		const userName = JSON.parse(document.getElementById('user-name').textContent);
+
+		const chatSocket = new WebSocket(
+			'ws://'
+			+ window.location.host
+			+ '/ws/chat/'
+			+ roomName
+			+ '/'
+		);
+
+		chatSocket.onmessage = function(e) {
+			const data = JSON.parse(e.data);
+
+			if(data.message){
+				document.querySelector('#chat-message').innerHTML += ("<div style='background-color: gray; width: 200px; height: auto; border-radius: 3px; padding: 5px; margin-bottom: 5px;'>" + data.username + ":" + data.message + '</div>');
+			} else {
+				alert('The message box is empty!!!');
+			}
+			
+		};
+
+		chatSocket.onclose = function(e) {
+			console.error('Chat socket closed unexpectedly');
+		};
+
+		document.querySelector('#chat-message-input').focus();
+		document.querySelector('#chat-message-input').onkeyup = function(e) {
+			if (e.keyCode === 13) {  // enter, return
+				document.querySelector('#chat-message-submit').click();
+			}
+		};
+
+		document.querySelector('#chat-message-submit').onclick = function(e) {
+			const messageInputDom = document.querySelector('#chat-message-input');
+			const message = messageInputDom.value;
+			chatSocket.send(JSON.stringify({
+				'message': message,
+				'username': userName,
+				'room': roomName
+			}));
+			messageInputDom.value = '';
+		};
+	</script>
+</body>
+</html>

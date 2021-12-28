@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+  
+{% block content %}
+  
+<div class="content-wrapper">
+  <div class="post-card">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group ">
+        <legend class="border-bottom mb-4">Update Project</legend>
+        <div class="input-group mb-3">
+          {% render_field form.project class="form-control" placeholder="Username" %}
+          
+        </div>
+
+        <div class="input-group mb-3">
+          {% render_field form.description class="form-control" placeholder="Email" %}
+          
+        </div>  
+
+        <div class="input-group mb-3">
+          {% render_field form.sponsors class="form-control" placeholder="Organisation" %}
+          
+        </div>
+        <div class="input-group mb-3">
+          {% render_field form.project_manager class="form-control" placeholder="Country" %}
+          
+        </div>
+        <div class="input-group mb-3">
+          {% render_field form.theme class="form-control" placeholder="Phone Number" placeholder="Theme" %}
+          
+        </div>
+      </fieldset>
+      <div class="form-group">
+          <button class="btn btn-outline-info" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+        
+{% endblock content %}

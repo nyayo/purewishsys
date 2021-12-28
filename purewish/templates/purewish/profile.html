@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<style type="text/css">
+    .content-section {
+      padding: 10px 20px;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+
+    .content-section:hover{
+      border-radius: 5px;
+    }
+
+    .article-title {
+      color: #444444;
+    }
+
+    a.article-title:hover {
+      color: #428bca;
+      text-decoration: none;
+    }
+
+    .article-content {
+      white-space: pre-line;
+    }
+
+    .article-img {
+      height: 65px;
+      width: 65px;
+      margin-right: 16px;
+    }
+
+    .article-metadata {
+      padding-bottom: 1px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid #e3e3e3
+    }
+
+    .article-metadata a:hover {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .article-svg {
+      width: 25px;
+      height: 25px;
+      vertical-align: middle;
+    }
+
+    .account-img {
+      height: 125px;
+      width: 125px;
+    }
+    .media {
+        background-color: #2b3035;
+        border-radius: 4px;
+        padding: 10px;
+    }
+</style>
+<div class="content-wrapper">
+    <section class="content">
+    	<div class="content-section">
+           <div class="media">
+               <img class="rounded-circle account-img w-120" src="{{ user.profile.image.url }}">
+               <div class="media-body ml-4 mt-4">
+                   <h2 class="account-heading">{{ user.username }}</h2>
+                   <p class="text-primary">{{ user.email }}</p>
+               </div>
+    	   </div>
+    	   <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group mt-4">
+                    <legend class="border-bottom mb-4">Profile Info</legend>
+                    <div class="input-group mb-3">
+                      {% render_field u_form.username class="form-control" placeholder="Username" %}
+                    </div> 
+                    <div class="input-group mb-3">
+                      {% render_field u_form.first_name class="form-control" placeholder="First Name" %}
+                    </div> 
+                    <div class="input-group mb-3">
+                      {% render_field u_form.last_name class="form-control" placeholder="Last Name" %}
+                    </div> 
+                    <div class="input-group mb-3">
+                      {% render_field u_form.email class="form-control" placeholder="Email" %}
+                    </div> 
+                    {{ p_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Update</button>
+                </div>
+            </form>
+    	</div>
+    </section>
+</div>
+{% endblock %}

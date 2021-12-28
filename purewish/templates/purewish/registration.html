@@ -1,0 +1,155 @@
+<?php
+require_once('config.php');
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Purewish | Registration Page </title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition register-page">
+
+
+<div class="register-box">
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <a href="login.php" class="h4"><b>Purewish Foundation Uganda </b></a>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg">Register a new membership</p>
+
+<div>
+	<?php
+	
+	?>	
+</div>
+
+<div>
+
+<form action="#" method="post">
+        <div class="input-group mb-3">
+          <input type="text" name="name" id="name" class="form-control" placeholder="Full name" requried>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="email" name="email" id="email" class="form-control" placeholder="Email" requried>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="password" name="password" id="password" class="form-control" placeholder="Password" requried>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password"  class="form-control" placeholder="Retype password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+              <label for="agreeTerms">
+               I agree to the <a href="#">terms</a>
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <!-- <div class="col-4"> -->
+            
+          </div>
+            <!-- /.col -->
+            <button type="submit" id="register" name="create" class="btn btn-primary btn-block">Register</button>
+          </div>
+      </form>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#register').click(function(e){
+
+			var valid = this.form.checkValidity();
+
+			if(valid){
+
+
+			
+			var role = "user";
+			var name 	= $('#name').val();
+			// var lastname	= $('#lastname').val();
+			var email 		= $('#email').val();
+			// var phonenumber = $('#phonenumber').val();
+			var password 	= $('#password').val();
+			var privilege = "Not Everything Allowed";
+			
+
+				e.preventDefault();	
+
+				$.ajax({
+					type: 'POST',
+					url: 'process.php',
+					data: {role: role,name: name,email: email,password: password, privilege: privilege},
+					success: function(data){
+					Swal.fire({
+								'title': 'Successful',
+								'text': data,
+								'type': 'success'
+								})
+							
+					},
+					error: function(data){
+						Swal.fire({
+								'title': 'Errors',
+								'text': 'There were errors while saving the data.',
+								'type': 'error'
+								})
+					}
+				});
+
+				
+			}else{
+				
+			}
+
+			
+
+
+
+		});		
+
+		
+	});
+	
+</script>
+</body>
+</html>

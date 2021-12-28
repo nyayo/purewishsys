@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+<style type="text/css">
+  tr:nth-child(even) {
+    background-color: #454d55;
+  }
+  tr:hover {
+    opacity: 0.5;
+  }
+  /* .backgrody {
+    background-color: #454d55;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px;
+  } */
+
+  .backgrody:hover {
+    background-color: gray;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    width: 25px;
+    height: auto;
+  }
+
+  .backgrods:hover {
+    background-color: gray;
+    padding-left: 1px;
+    padding-bottom: 2px;
+    border-radius: 5px;
+    width: 25px;
+    height: auto;
+  }
+
+  /* .backgrodx {
+    background-color: #454d55;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px;
+  }
+
+  .cross {
+    color: white;
+  }
+
+  .cross:hover {
+    color: #343a40;
+  }
+
+  .head {
+    color: blue;
+    background-color: #2b3035;
+    border-top-left-radius: 5px;
+  }
+
+  .backgroid {
+    width: auto;
+  }
+
+  .borderd {
+    border-top-left-radius: 4px;
+  }
+
+  .borderr {
+    border-top-right-radius: 4px;
+  } */
+</style>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Projects</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+              <li class="breadcrumb-item active">Projects</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            
+            <!-- /.card -->
+
+            <div class="card">
+
+              <div class="card-header">
+                <h3 class="card-title">
+      
+                  
+                
+                </h3>
+      
+                <div class="card-tools">
+                    <div >
+                      <div class="modal fade span-12" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="padding: 15px;">
+                            <div class="modal-header text-center">
+                              <h4 class="modal-title w-100 font-weight-bold">Enter Project Details</h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                                <!-- Form Starts here -->
+                               
+                          </div>
+                        </div>
+                    </div>
+      
+                    <div class="text-center">
+                      <a href="" class="btn btn-default" data-toggle="modal" data-target="#modalRegisterForm"><i class="nav-icon fas fa-plus" style="margin-right: 5px;"></i>Add Project</a>
+                    </div>
+                  </div>
+                </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table cellpadding="4">
+                  <thead>
+                    <tr class="head">
+                      <th class="borderr" bgcolor="#2b3035" width="300" scope="col">PROJECTS</th>
+                      <th width="2000" bgcolor="#2b3035" colspan="4" scope="col">DESCRIPTION</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for p in project %}
+                    <tr>
+                      <div>
+                        <td width="400" scope="col">
+                          <a style="color: white;" href="{% url 'update-project' p.id %}" title="">
+                            <div class="backgrod">
+                              {{p.project}}
+                            </div>
+                          </a>
+                        </td>
+
+                        <td width="2000" scope="col">
+                          <div class="backgrodx">
+                            {{p.description}}
+                          </div>
+                        </td>
+
+                        <td width="50">
+                          <div class="backgrody">
+                            <button type="button" class="btn btn-tool" title="Remove">
+                              <a class="cross" href="{% url 'update-project' p.id %}" title=""><i class="fas fa-edit"></i></a>
+                            </button>
+                          </div>
+                        </td>
+                        <td width="50">
+                          <div class="backgrods">
+                            <button type="button" class="btn btn-tool" title="Remove">
+                              <a class="cross" href="{% url 'delete-project' p.id %}" title=""><i class="fas fa-times"></i></a>
+                            </button>
+                          </div>
+                        </td>
+                      </div>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <div class="container">
+                  <br />
+                  <!-- <div align="right" style="margin-bottom:5px;">
+                  <button type="submit" name="add" id="add" class="btn btn-success btn-xs">Add</button>
+                  </div> -->
+                  <div class="table-responsive" id="user_data">
+                    
+                  </div>
+                  <br />
+                </div>
+    
+                <!-- <div id="user_dialog" title="Add Data">
+                  <form method="post" id="user_form">
+                    <div class="form-group">
+                      <label>Enter First Name</label>
+                      <input type="text" name="name" id="name" class="form-control" />
+                      <span id="error_name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                      <label>Enter Last Name</label>
+                      <input type="text" name="email" id="email" class="form-control" />
+                      <span id="error_email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                      <input type="hidden" name="action" id="action" value="insert" />
+                      <input type="hidden" name="hidden_id" id="hidden_id" />
+                      <input type="submit" name="form_action" id="form_action" class="btn btn-info" value="Insert" />
+                    </div>
+                  </form>
+                </div>
+    
+                <div id="action_alert" title="Action">
+                  
+                </div>
+    
+                <div id="delete_confirmation" title="Confirmation">
+                <p>Are you sure you want to Delete this data?</p>
+                </div> -->
+                <!-- End CRUD script -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  {% endblock content %}

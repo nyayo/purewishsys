@@ -1,0 +1,7 @@
+{% for i in image %}
+	<li>
+	  <img src="{{i.image.url}}" alt="{{i.alt}}">
+	  <a class="users-list-name" href="#">Alexander Pierce</a><hr>
+	  <span class="users-list-date">Today</span>
+	</li>
+{% endfor %}

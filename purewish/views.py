@@ -44,7 +44,7 @@ def index(request):
     t_user = User.objects.all()
     total_user = int(t_user.count()) / 100
     donor = Donor.objects.all()
-    timenow = datetime.now().strftime("%B %d, %Y")
+    timenow = datetime.now().strftime("%d %b %H:%M")
     room_name = "purewish"
     images = Gallery.objects.all()
     stuffs = Stuff.objects.all()

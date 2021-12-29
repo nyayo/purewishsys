@@ -826,7 +826,7 @@
             const data = JSON.parse(e.data);
 
             if(data.message){
-            	document.querySelector('#direct-chat-body').innerHTML += ('<div class="direct-chat-msg right">' + '<div class="direct-chat-infos clearfix">' + '<span class="direct-chat-name float-right">' + data.username + '</span>' + '<span class="direct-chat-timestamp float-left">' + data.timenow + '</span>' + '</div>' + '<img class="direct-chat-img" src="data.profile_pic" alt="message user image">' + '<div class="direct-chat-text">' + data.message + '</div>' + '</div>');
+            	document.querySelector('#direct-chat-body').innerHTML += ('<div class="direct-chat-msg right">' + '<div class="direct-chat-infos clearfix">' + '<span class="direct-chat-name float-right">' + data.username + '</span>' + '<span class="direct-chat-timestamp float-left">' + data.timenow + '</span>' + '</div>' + `<img class="direct-chat-img" src="${data.profile_pic}" alt="message user image">` + '<div class="direct-chat-text">' + data.message + '</div>' + '</div>');
             } else {
             	alert("Please enter the message.");
             }

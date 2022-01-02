@@ -29,7 +29,7 @@ def index(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')
         donors = Donor.objects.filter(
-            Q(username__username__icontains=q) |
+            Q(username__icontains=q) |
             Q(organisation__icontains=q) |
             Q(country__icontains=q)
         )
@@ -133,7 +133,7 @@ def view_donor(request):
     else:
         q = ''
         donor = Donor.objects.filter(
-            Q(username_username__icontains=q) |
+            Q(username__icontains=q) |
             Q(organisation__icontains=q) |
             Q(country__icontains=q)
         )
@@ -457,7 +457,7 @@ def calender(request):
 @login_required(login_url='login')
 def gallery(request):
     images = Gallery.objects.all()
-    form = GalleryForm(request.POST,request.FILES)
+    form = GalleryForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
             photo = form.save(commit=False)

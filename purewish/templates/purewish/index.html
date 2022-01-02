@@ -209,7 +209,7 @@
                         <div id="chat-messages" class="direct-chat-msg right">
                           <div class="direct-chat-infos clearfix">
                             <span class="direct-chat-name float-right">{{m.user}}</span>
-                            <span class="direct-chat-timestamp float-left">{{m.created|date:"F d, Y" }}</span>
+                            <span class="direct-chat-timestamp float-left">{{m.created|date:"d M H:i" }}</span>
                           </div>
                           <!-- /.direct-chat-infos -->
                           <img class="direct-chat-img" src="{{m.user.profile.image.url}}" alt="message user image">
@@ -226,7 +226,7 @@
                         <div class="direct-chat-msg">
                           <div class="direct-chat-infos clearfix">
                             <span class="direct-chat-name float-left">{{m.user}}</span>
-                            <span class="direct-chat-timestamp float-right">{{m.created|date:"F d, Y" }}</span>
+                            <span class="direct-chat-timestamp float-right">{{m.created|date:"d M H:i" }}</span>
                           </div>
                           <!-- /.direct-chat-infos -->
                           <img class="direct-chat-img" src="{{m.user.profile.image.url}}" alt="message user image">

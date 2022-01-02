@@ -17,7 +17,7 @@ class Posts(models.Model):
 
 
 class Donor(models.Model):
-    username = models.ForeignKey(User, related_name='user_donor', on_delete=models.CASCADE)
+    username = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100, blank=True)
     second_name = models.CharField(max_length=100, blank=True)
     email = models.EmailField()
@@ -43,7 +43,8 @@ class Donor(models.Model):
 
 
 class Messages(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_msg')
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='user_msg')
     message = models.TextField()
     room = models.CharField(max_length=150, default='purewish')
     updated = models.DateTimeField(auto_now=True)
@@ -57,7 +58,7 @@ class Messages(models.Model):
 
 
 class Stuff(models.Model):
-    stuff = models.ForeignKey(User, related_name='user_stuff', on_delete=models.CASCADE)
+    stuff = models.CharField(max_length=200)
     first_name = models.CharField(max_length=100, blank=True)
     second_name = models.CharField(max_length=100, blank=True)
     email = models.EmailField()
@@ -82,7 +83,7 @@ class Stuff(models.Model):
 
 
 class Volunteer(models.Model):
-    volunteer = models.ForeignKey(User, related_name='user_volunteer', on_delete=models.CASCADE)
+    volunteer = models.CharField(max_length=200)
     first_name = models.CharField(max_length=200, blank=True)
     second_name = models.CharField(max_length=100, blank=True)
     email = models.EmailField()

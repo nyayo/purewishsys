@@ -5,38 +5,42 @@
 {% block content %}
   
 <div class="content-wrapper">
-  <div class="post-card">
-    <form action="" method="POST">
-      {% csrf_token %}
-      <fieldset class="form-group ">
-        <legend class="border-bottom mb-4">Add Project</legend>
-        <div class="input-group mb-3">
-          {% render_field form.project class="form-control" placeholder="Project Name" %}
+  <section class="content">
+    <div class="card">
+      <div class="card-body">
+        <form action="" method="POST">
+          {% csrf_token %}
+          <fieldset class="form-group ">
+            <legend class="border-bottom mb-4">Add Project</legend>
+            <div class="input-group mb-3">
+              {% render_field form.project class="form-control" placeholder="Project Name" %}
 
-        </div>
+            </div>
 
-        <div class="input-group mb-3">
-          {% render_field form.description class="form-control" placeholder="Description" %}
-          
-        </div>  
+            <div class="input-group mb-3">
+              {% render_field form.description class="form-control" placeholder="Description" %}
+              
+            </div>  
 
-        <div class="input-group mb-3">
-          {% render_field form.sponsors class="form-control" placeholder="Sponsors" %}
-          
-        </div>
-        <div class="input-group mb-3">
-          {% render_field form.project_manager class="form-control" placeholder="Project Manager" %}
-          
-        </div>
-        <div class="input-group mb-3">
-          {% render_field form.theme class="form-control" placeholder="Theme" %}
-        </div>
-      </fieldset>
-      <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Save</button>
+            <div class="input-group mb-3">
+              {% render_field form.sponsors class="form-control" placeholder="Sponsors" %}
+              
+            </div>
+            <div class="input-group mb-3">
+              {% render_field form.project_manager class="form-control" placeholder="Project Manager" %}
+              
+            </div>
+            <div class="input-group mb-3">
+              {% render_field form.theme class="form-control" placeholder="Theme" %}
+            </div>
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Save</button>
+          </div>
+        </form>
       </div>
-    </form>
-  </div>
+    </div>
+  </section>
 </div>
         
 {% endblock content %}

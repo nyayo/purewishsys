@@ -38,7 +38,7 @@
                   </div>
                       <!-- Form Starts here -->
 
-                      <form method="post">
+                      <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <fieldset>
                           <div class="input-group mb-3">
@@ -78,7 +78,7 @@
               <div class="card-body">
                 <div>
                   <div class="mb-2">
-                    <a class="btn btn-secondary" href="javascript:void(0)" data-shuffle>Shuffle</a>
+                    <!-- <a class="btn btn-secondary" href="javascript:void(0)" data-shuffle>Shuffle</a> -->
 
                     <div class="float-right">
                       <div class="btn-group">
@@ -95,7 +95,7 @@
                     {% for i in images %}
                       <div class="col-sm-2">
                         <a href="{{i.image.url}}" title="" data-toggle="lightbox" data-title="{{i.title}}">
-                          <img src="{{i.image.url}}" alt="{{i.title}}" class="img-fluid mb-2 mr-2" width="150" height="10">
+                          <img src="{{i.image.url}}" alt="{{i.title}}" data-toggle="lightbox" class="img-fluid mb-2 mr-2" width="150" height="10">
                         </a>
                       </div>
                     {% endfor %}

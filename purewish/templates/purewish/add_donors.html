@@ -5,62 +5,66 @@
 {% block content %}
   
 <div class="content-wrapper">
-  <div class="post-card">
-    <form action="" method="POST">
-      {% csrf_token %}
-      <fieldset class="form-group ">
-          <legend class="border-bottom mb-4">Add Donor</legend>
-          <div class="input-group mb-3">
-            {% render_field form.username class="form-control" placeholder="Username" %}
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
+  <section class="content">
+    <div class="card">
+      <div class="card-body">
+        <form action="" method="POST">
+          {% csrf_token %}
+          <fieldset class="form-group ">
+              <legend class="border-bottom mb-4">Add Donor</legend>
+              <div class="input-group mb-3">
+                {% render_field form.username class="form-control" placeholder="Username" %}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div class="input-group mb-3">
-            {% render_field form.email class="form-control" placeholder="Email" %}
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
-              </div>
-            </div>
-          </div>  
+              <div class="input-group mb-3">
+                {% render_field form.email class="form-control" placeholder="Email" %}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                  </div>
+                </div>
+              </div>  
 
-          <div class="input-group mb-3">
-            {% render_field form.organisation class="form-control" placeholder="Organisation" %}
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-sitemap"></span>
+              <div class="input-group mb-3">
+                {% render_field form.organisation class="form-control" placeholder="Organisation" %}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-sitemap"></span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="input-group mb-3">
-            {% render_field form.country class="form-control" placeholder="Country" %}
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-globe"></span>
+              <div class="input-group mb-3">
+                {% render_field form.country class="form-control" placeholder="Country" %}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-globe"></span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="input-group mb-3">
-            {% render_field form.phone class="form-control" placeholder="Phone Number" type="tel" %}
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-phone"></span>
+              <div class="input-group mb-3">
+                {% render_field form.phone class="form-control" placeholder="Phone Number" type="tel" %}
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-phone"></span>
+                  </div>
+                </div>
               </div>
-            </div>
+              <div class="input-group mb-3">
+                {% render_field form.image class="form-control" %}
+              </div>
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Save</button>
           </div>
-          <div class="input-group mb-3">
-            {% render_field form.image class="form-control" %}
-          </div>
-      </fieldset>
-      <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Save</button>
+        </form>
       </div>
-    </form>
-  </div>
+    </div>
+  </section>
 </div>
         
 {% endblock content %}

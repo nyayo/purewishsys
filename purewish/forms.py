@@ -23,11 +23,13 @@ class MessageForm(forms.ModelForm):
         fields = ['message']
 
 
-class StuffForm(forms.ModelForm):
+class StuffForm(UserCreationForm):
+    email = forms.EmailField()
+
     class Meta:
-        model = Stuff
-        fields = ['stuff', 'first_name',
-                  'second_name', 'email', 'phone', 'role']
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name',
+                  'is_staff', 'is_active', 'password1', 'password2']
 
 
 class VolunteerForm(forms.ModelForm):
@@ -67,4 +69,4 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ['image', 'gender', 'phone', 'role']

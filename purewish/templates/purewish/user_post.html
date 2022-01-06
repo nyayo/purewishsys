@@ -8,10 +8,11 @@
     height: auto;
     padding: 5px;
     border-radius: 5px;
+    margin-bottom: 30px;
   }
 
   .article-title {
-    color: #444444;
+    color: white;
   }
 
   a.article-title:hover {
@@ -67,9 +68,9 @@
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-	          {% for p in post %}
+	          {% for p in posts %}
 	          <div class="post-body media content content-section">
-	            <img class="rounded-circle article-img mt-3" src="" alt="">
+	            <img class="rounded-circle article-img mt-3" src="{{ p.author.profile.image.url }}" alt="">
 	            <div class="media-body">
 	              <div class="article-metadata">
 	                <a class="mr-2" href="{% url 'user-posts' p.author.username %}">{{ p.author }}</a>

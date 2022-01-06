@@ -5,40 +5,72 @@
 {% block content %}
   
 <div class="content-wrapper">
-  <div class="post-card">
-    <form action="" method="POST">
-      {% csrf_token %}
-      <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Update Stuff</legend>
-          <div class="input-group mb-3">
-            {% render_field form.stuff id="username" class="form-control" placeholder="Username" %}
-          </div>
+  <section class="content">
+  <div class="card">
+    <div class="card-body">
+      <div class="media">
+        <img class="account-img w-120" src="{{ stuff.profile.image.url }}">
+        <div class="media-body ml-4 mt-4">
+            <h2 class="account-heading">Username: {{ stuff.username }}</h2>
+            <p class="text-secondary">Email: {{ stuff.email }}</p>
+        </div>
+       </div>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Staff Details</legend>
+            <div class="input-group mb-3">
+              {% render_field u_form.username id="username" class="form-control" placeholder="Username" %}
+            </div>
 
-          <div class="input-group mb-3">
-            {% render_field form.first_name id="first"  class="form-control" placeholder="First Name" %}
-          </div>
+            <div class="input-group mb-3">
+              {% render_field u_form.first_name id="first"  class="form-control" placeholder="First Name" %}
+            </div>
 
-          <div class="input-group mb-3">
-            {% render_field form.second_name id="second" class="form-control" placeholder="Second Name" %}
-          </div>
+            <div class="input-group mb-3">
+              {% render_field u_form.last_name id="last" class="form-control" placeholder="Second Name" %}
+            </div>
 
-          <div class="input-group mb-3">
-            {% render_field form.email id="email" class="form-control" placeholder="Email" %}
-          </div>
+            <div class="input-group mb-3">
+              {% render_field u_form.email id="email" class="form-control" placeholder="Email" %}
+            </div>
 
-          <div class="input-group mb-3">
-            {% render_field form.phone id="phone" class="form-control" type="tel" placeholder="Phone Number" %}
-          </div>
 
-          <div class="input-group mb-3">
-            {% render_field form.role id="role"  class="form-control" placeholder="Role" %}
-          </div>
-      </fieldset>
-      <div class="form-group" style="left: auto;" >
-          <button class="btn btn-outline-info" type="submit">Update</button>
-      </div>
-    </form>
+            <div class="input-group mb-3">
+              {% render_field u_form.date_joined id="date_joined" class="form-control" %}
+            </div>
+
+            <div class="input-group mb-3">
+              {% render_field p_form.gender id="gender" class="form-control" %}
+            </div>
+
+            <div class="input-group mb-3">
+              {% render_field p_form.phone id="phone" class="form-control" placeholder="Phone Number" %}
+            </div>
+
+            <div class="input-group mb-3">
+              {% render_field p_form.role id="role"  class="form-control" placeholder="Role" %}
+            </div>
+            {% if request.user.is_superuser == True and request.user.is_staff %}
+            <div class="input-group mb-3">
+              {% render_field u_form.is_staff id="is_staff" %}
+              <div style="margin-left: 5px;">Staff Status</div>
+            </div>
+
+            <div class="input-group mb-3">
+              {% render_field u_form.is_active id="is_active" %}
+              <div style="margin-left: 5px;">Active</div>
+            </div>
+            {% endif %}
+            {{p_form.image}}
+        </fieldset>
+        <div class="form-group" style="left: auto;" >
+            <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+      </form>
+    </div>
   </div>
+</section>
 </div>
         
 {% endblock content %}

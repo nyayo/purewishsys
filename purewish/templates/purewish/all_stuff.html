@@ -9,12 +9,10 @@
   tr:hover {
     opacity: 0.5;
   }
-  /* .backgrody {
-    background-color: #454d55;
-    border-radius: 4px;
-    padding: 5px;
-    height: 30px;
-  } */
+  .backgrod_u:hover {
+    text-decoration: underline;
+    color: blue;
+  }
 
   tr button a {
     color: white;
@@ -125,7 +123,7 @@
                                   {% csrf_token %}
                                   <fieldset>
                                     <div class="input-group mb-3">
-                                      {% render_field form.stuff class="form-control" placeholder="Username" %}
+                                      {% render_field u_form.username class="form-control" placeholder="Username" %}
                                       <div class="input-group-append">
                                         <div class="input-group-text">
                                           <span class="fas fa-user"></span>
@@ -134,7 +132,7 @@
                                     </div>
         
                                     <div class="input-group mb-3">
-                                      {% render_field form.email class="form-control" placeholder="Email" %}
+                                      {% render_field u_form.email class="form-control" placeholder="Email" %}
 
                                       <div class="input-group-append">
                                         <div class="input-group-text">
@@ -142,8 +140,14 @@
                                         </div>
                                       </div>
                                     </div>
+
                                     <div class="input-group mb-3">
-                                      {% render_field form.phone class="form-control" placeholder="Phone Number" type="tel" %}
+                                      {% render_field u_form.is_staff id='staff' %}
+                                      <div style="margin-left: 5px;">Staff status</div>
+                                    </div>
+                                    
+                                    <div class="input-group mb-3">
+                                      {% render_field u_form.password1 class="form-control" placeholder="Password" %}
 
                                       <div class="input-group-append">
                                         <div class="input-group-text">
@@ -152,11 +156,11 @@
                                       </div>
                                     </div>
                                     <div class="input-group mb-3">
-                                      {% render_field form.role class="form-control" placeholder="Stuff Role" %}
+                                      {% render_field u_form.password2 class="form-control" placeholder="Comfirm Password" %}
                                     </div>
                                     
                                     <div class="row">
-                                      <div class="col-8">
+                                      <!-- <div class="col-8">
                                         <div class="icheck-primary">
                                           <input type="checkbox" id="agreeTerms" >
 
@@ -164,7 +168,7 @@
                                           I agree to the <a href="#">terms</a>
                                           </label>
                                         </div>
-                                      </div>
+                                      </div> -->
                                       <!-- /.col -->
                                       <div class="col-4">
                                         <!-- <button type="submit" id="register" name="create" class="btn btn-primary btn-block">Register</button> -->
@@ -205,72 +209,70 @@
                 <h3 class="card-title">DataTable with staff features</h3>
               </div> -->
               <!-- /.card-header -->
-              <div class="card-body" style="overflow-x: auto;">
+              <div class="card-body" style="overflow-x: scroll;">
                 <table cellpadding="4" cellspacing="10">
             <thead>
               <tr class="head">
-                <th class="borderd" bgcolor="#2b3035" width="20" scope="col">N/O</th>
                 <th class="borderr" bgcolor="#2b3035" width="2000" scope="col">USERNAME</th>
                 <th width="300" bgcolor="#2b3035" scope="col">FIRST NAME</th>
-                <th width="300" bgcolor="#2b3035" scope="col">SECOND NAME</th>
-                <th width="300" bgcolor="#2b3035" colspan="4" scope="col">ROLE</th>
+                <th width="300" bgcolor="#2b3035" scope="col">ROLE</th>
+                <th width="300" bgcolor="#2b3035" colspan="4" scope="col">IS_STAFF</th>
               </tr>
             </thead>
             <tbody>
               {% for s in stuff %}
-              <tr cellspacing="10">
-                <td width="20" scope="col">
-                  <div>
-                    <a style="color: white;" href="{% url 'update-stuff' s.id %}" title="">{{s.id}}</a>
-                  </div>
-                </td>
-                <td width="2000" scope="col">
-                  <a style="color: white;" href="{% url 'update-stuff' s.id %}" title="">
-                    <div class="backgrod">
-                      {{s.stuff}}
-                    </div>
-                  </a>
-                </dh>
+                {% if s.is_staff == True %}
+                <tr cellspacing="10">
+                  <td width="2000" scope="col">
+                    <a style="color: white;" href="{% url 'update-stuff' s.id %}" title="">
+                      <div class="backgrod_u">
+                        {{s.username}}
+                      </div>
+                    </a>
+                  </dh>
 
-                <td width="300" scope="col">
-                  <a style="color: white;" href="{% url 'update-stuff' s.id %}" title="">
-                    <div class="backgrodx">
-                      {{s.first_name}}
-                    </div>
-                  </a>
-                </td>
+                  <td width="300" scope="col">
+                    <a style="color: white;" href="{% url 'update-stuff' s.id %}" title="">
+                      <div class="backgrodx">
+                        {{s.email}}
+                      </div>
+                    </a>
+                  </td>
 
-                <td width="300" scope="col">
-                  <a style="color: white;" href="{% url 'update-stuff' s.id %}" title="">
-                    <div class="backgrod">
-                      {{s.second_name}}
-                    </div>
-                  </a>
-                </td>
+                  <td width="300" scope="col">
+                    <a style="color: white;" href="{% url 'update-stuff' s.id %}" title="">
+                      <div class="backgrod">
+                        {{s.profile.role}}
+                      </div>
+                    </a>
+                  </td>
 
-                <td width="300" scope="col">
-                  <a style="color: white;" href="{% url 'update-stuff' s.id %}" title="">
-                    <div class="backgrodx">
-                      {{s.role}}
-                    </div>
-                  </a>
-                </td>
+                  <td width="300" scope="col">
+                    <a style="color: white;" href="{% url 'update-stuff' s.id %}" title="">
+                      <div class="backgrodx">
+                        {{s.is_staff}}
+                      </div>
+                    </a>
+                  </td>
 
-                <td width="50">
-                  <div class="backgrody">
-                    <button type="button" class="btn btn-tool" title="Remove">
-                      <a class="cross" href="{% url 'update-stuff' s.id %}" title=""><i class="fas fa-edit"></i></a>
-                    </button>
-                  </div>
-                </td>
-                <td width="50">
-                  <div class="backgrods">
-                    <button type="button" class="btn btn-tool" title="Remove">
-                      <a class="cross" href="{% url 'delete-stuff' s.id %}" title=""><i class="fas fa-times"></i></a>
-                    </button>
-                  </div>
-                </td>
-              </tr>
+                  <td width="50">
+                    <div class="backgrody">
+                      <button type="button" class="btn btn-tool" title="Remove">
+                        <a class="cross" href="{% url 'update-stuff' s.id %}" title=""><i class="fas fa-edit"></i></a>
+                      </button>
+                    </div>
+                  </td>
+                  <td width="50">
+                    <div class="backgrods">
+                      <button type="button" class="btn btn-tool" title="Remove">
+                        <a class="cross" href="{% url 'delete-stuff' s.id %}" title=""><i class="fas fa-times"></i></a>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {% else %}
+
+                {% endif %}
               {% endfor %}
             </tbody>
           </table>

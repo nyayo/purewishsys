@@ -5,36 +5,40 @@
 {% block content %}
   
 <div class="content-wrapper">
-  <div class="post-card">
-    <form action="" method="POST">
-      {% csrf_token %}
-      <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Update Volunteer</legend>
-           <div class="input-group mb-3">
-            {% render_field form.volunteer id="username" class="form-control" placeholder="Username" %}
-          </div>
+  <section class="content">
+    <div class="card">
+      <div class="card-body">
+        <form action="" method="POST">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Update Volunteer</legend>
+               <div class="input-group mb-3">
+                {% render_field form.volunteer id="username" class="form-control" placeholder="Username" %}
+              </div>
 
-          <div class="input-group mb-3">
-            {% render_field form.first_name id="first"  class="form-control" placeholder="First Name" %}
-          </div>
+              <div class="input-group mb-3">
+                {% render_field form.first_name id="first"  class="form-control" placeholder="First Name" %}
+              </div>
 
-          <div class="input-group mb-3">
-            {% render_field form.second_name id="second" class="form-control" placeholder="Second Name" %}
-          </div>
+              <div class="input-group mb-3">
+                {% render_field form.second_name id="second" class="form-control" placeholder="Second Name" %}
+              </div>
 
-          <div class="input-group mb-3">
-            {% render_field form.email id="email" class="form-control" placeholder="Email" %}
-          </div>
+              <div class="input-group mb-3">
+                {% render_field form.email id="email" class="form-control" placeholder="Email" %}
+              </div>
 
-          <div class="input-group mb-3">
-            {% render_field form.phone id="phone" class="form-control" type="tel" placeholder="Phone Number" %}
+              <div class="input-group mb-3">
+                {% render_field form.phone id="phone" class="form-control" type="tel" placeholder="Phone Number" %}
+              </div>
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Update</button>
           </div>
-      </fieldset>
-      <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Update</button>
+        </form>
       </div>
-    </form>
-  </div>
+    </div>
+  </section>
 </div>
         
 {% endblock content %}

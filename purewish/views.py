@@ -47,7 +47,7 @@ def index(request):
     timenow = datetime.now().strftime("%d %b %H:%M")
     room_name = "purewish"
     images = Gallery.objects.all()
-    stuffs = Stuff.objects.all()
+    stuffs = User.objects.all()
     total_stuff = stuffs.count()
 
     count = donor.count()
@@ -55,7 +55,7 @@ def index(request):
 
     message_count = message.count()
     context = {'donors': donors, 'count': count, 'message': message, 'donor': donor, 'message_count': message_count, 'images': images,
-               'room_name': room_name, 'timenow': timenow, 'total_user': total_user, 'total_stuff': total_stuff}
+               'room_name': room_name, 'timenow': timenow, 'total_user': total_user, 'total_stuff': total_stuff, 'stuffs': stuffs}
     return render(request, 'purewish/index.html', context)
 
 
@@ -289,14 +289,14 @@ def available_staff(request):
     page = 'stuff_page'
     if request.GET.get('q') != None:
         q = request.GET.get('q')
-        stuff = Stuff.objects.filter(
-            Q(stuff__icontains=q) |
+        stuff = User.objects.filter(
+            Q(username__icontains=q) |
             Q(first_name__icontains=q)
         )
     else:
         q = ''
-        stuff = Stuff.objects.filter(
-            Q(stuff__icontains=q) |
+        stuff = User.objects.filter(
+            Q(username__icontains=q) |
             Q(first_name__icontains=q)
         )
     form = StuffForm(request.POST)
@@ -316,42 +316,48 @@ def available_staff(request):
 
 @login_required(login_url='login')
 def add_staff(request):
-    form = StuffForm(request.POST)
+    u_form = StuffForm(request.POST)
+    p_form = ProfileUpdateForm(request.POST)
     if request.method == 'POST':
-        if form.is_valid():
-            stuff = form.save(commit=False)
+        if u_form.is_valid() and p_form.is_valid():
+            stuff = u_form.save(commit=False)
             stuff.save()
+            profile = p_form.save(commit=False)
+            profile.save()
 
             return redirect('all-staffs')
 
         else:
             messages.error(request, 'Please enter a vaild info for the form.')
-    context = {'form': form}
+    context = {'u_form': u_form, 'p_form': p_form}
     return render(request, 'purewish/add_stuff.html', context)
 
 
 @login_required(login_url='login')
 def update_stuff(request, id):
-    stuff = Stuff.objects.get(id=id)
-    form = StuffForm(instance=stuff)
+    stuff = User.objects.get(id=id)
+    u_form = StuffForm(instance=stuff)
+    p_form = ProfileUpdateForm(instance=stuff.profile)
 
     if request.method == 'POST':
-        form = StuffForm(request.POST, instance=stuff)
+        u_form = StuffForm(request.POST, instance=stuff)
+        p_form = ProfileUpdateForm(request.POST, instance=stuff.profile)
 
-        if form.is_valid():
-            form.save()
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
 
-            return redirect('all-staffs')
+            return redirect('add-staff')
 
         else:
             messages.error(request, 'Please enter a vaild info for the form.')
 
-    context = {'form': form}
+    context = {'u_form': u_form, 'p_form': p_form, 'stuff': stuff}
     return render(request, 'purewish/update_stuff.html', context)
 
 
 def delete_stuff(request, id):
-    stuff = Stuff.objects.get(id=id)
+    stuff = User.objects.get(id=id)
     stuff.delete()
 
     return redirect('all-staffs')
@@ -461,7 +467,7 @@ def gallery(request):
     if request.method == 'POST':
         if form.is_valid():
             photo = form.save(commit=False)
-            photo.save()
+            photo.save() 
 
             return redirect('gallery')
 
@@ -469,6 +475,22 @@ def gallery(request):
             messages.error(request, 'Please enter a vaild info for the form.')
     context = {'images': images, 'form': form}
     return render(request, 'purewish/gallery.html', context)
+
+
+@login_required(login_url='login')
+def add_image(request):
+    form = GalleryForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if form.is_valid():
+            photo = form.save(commit=False)
+            photo.save()
+
+            return redirect('gallery')
+
+        else:
+            messages.error(request, 'Please enter a vaild info for the form.')
+    context = {'form': form}
+    return render(request, 'purewish/add_image.html', context)
 
 
 @login_required(login_url='login')

@@ -58,10 +58,8 @@ class Messages(models.Model):
 
 
 class Stuff(models.Model):
-    stuff = models.CharField(max_length=200)
-    first_name = models.CharField(max_length=100, blank=True)
-    second_name = models.CharField(max_length=100, blank=True)
-    email = models.EmailField()
+    stuff = models.ForeignKey(
+        User, related_name='stuff', on_delete=models.CASCADE)
     phone = models.IntegerField()
     image = models.ImageField(default='default.png', upload_to='profile/')
     role = models.CharField(max_length=200)
@@ -120,8 +118,8 @@ class Gallery(models.Model):
 
         img = Image.open(self.image.path)
 
-        if img.height > 300 or img.width > 300:
-            output_size = (200, 200)
+        if img.height > 160 or img.width > 160:
+            output_size = (180, 180)
             img.thumbnail(output_size)
             img.save(self.image.path)
 
@@ -162,7 +160,12 @@ class ProjectManager(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    role = models.CharField(
+        max_length=200, default=None, blank=True, null=True)
+    phone = models.CharField(max_length=256, blank=True, null=True)
+    gender = models.CharField(max_length=1, choices=(
+        ('m', ('Male')), ('f', ('Female'))), blank=True, null=True)
     image = models.ImageField(default='default.png', upload_to='profile_pics')
 
     def __str__(self):
@@ -174,6 +177,6 @@ class Profile(models.Model):
         img = Image.open(self.image.path)
 
         if img.height > 300 or img.width > 300:
-            output_size = (200, 200)
+            output_size = (180, 180)
             img.thumbnail(output_size)
             img.save(self.image.path)

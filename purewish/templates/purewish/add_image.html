@@ -5,27 +5,25 @@
 {% block content %}
   
 <div class="content-wrapper"> 
-  <scetion class="content">
+  <section class="content">
     <div class="card">
       <div class="card-body">
-        <form action="{% url 'add-post' %}" method="POST">
+        <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <fieldset class="form-group">
-              <legend class="border-bottom mb-4">Add Post</legend>
+              <legend class="border-bottom mb-4">Add New Image</legend>
               <div class="input-group mb-3">
                 {% render_field form.title class="form-control" placeholder="Title" %}
               </div>
-              <div class="input-group mb-3">
-                {% render_field form.post class="form-control" %}
-              </div>
+              {{form.image}}
           </fieldset>
           <div class="form-group">
-              <button class="btn btn-outline-info" type="submit">Post</button>
+              <button class="btn btn-outline-info" type="submit">Save</button>
           </div>
         </form>
       </div>
     </div>
-  </scetion>
+  </section>
 </div>
         
 {% endblock content %}
